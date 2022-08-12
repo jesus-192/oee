@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Volo.Abp.EntityFrameworkCore;
 using oee.EntityFrameworkCore;
@@ -12,9 +13,10 @@ using oee.EntityFrameworkCore;
 namespace oee.Migrations
 {
     [DbContext(typeof(oeeDbContext))]
-    partial class oeeDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220811150050_Columna_TotalesPlaneadas")]
+    partial class Columna_TotalesPlaneadas
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -125,28 +127,6 @@ namespace oee.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Turnos");
-                });
-
-            modelBuilder.Entity("oee.Operacion.TiempoCiclo", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("NumerodeParte")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Programa")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("TiempoEnSegundos")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("TiempoCiclos");
                 });
 
             modelBuilder.Entity("Volo.Abp.AuditLogging.AuditLog", b =>

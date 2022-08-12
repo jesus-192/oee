@@ -16,6 +16,7 @@ namespace oee.Captura
     public int TurnoId { get; set; }
     public string NumeroParte { get; set; }
     public int TotalReales {get;set;}
+    public int TotalPlaneadas { get; set; }
 
     public decimal OE_Porcentaje { get; set; }
     public int GAP_Pzas { get; set; }
