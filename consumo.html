@@ -86,7 +86,7 @@
                                 </div>
                                 </div>
                                 <div class="form-group row form-group-marginless kt-margin-t-20">
-                                <label class="col-md-1 col-form-label">GAP(PZAS):</label>
+                             <!--  <label class="col-md-1 col-form-label">GAP(PZAS):</label>
                                 <div class="col-lg-2">
                                 <input type="Number" disabled class="form-control" id="txtGapPzas">
                                 </div>
@@ -94,6 +94,7 @@
                                 <div class="col-lg-2">
                                 <input type="Number" disabled class="form-control" id="txtGapMins">
                                 </div>
+                            -->
                                 <label class="col-md-1 col-form-label">TM:</label>
                                 <div class="col-lg-2">
                                 <input type="Number" class="form-control" id="txtTM">
@@ -119,7 +120,7 @@ var numeroParteList;
   $.get("http://oee-api.azurewebsites.net/api/app/categoria", function(data){
 
    });
-$.get("http://oee-api.azurewebsites.net/api/app/descripcion-falla", function(data){
+$.get("http://oee-api.azurewebsites.net/api/app/descripcion-falla/distinct", function(data){
 
     var $dropdown = $("#descripcion");
 $.each(data, function() {
@@ -146,8 +147,8 @@ $.each(data, function(i, item) {
             $('<td>').text(item.totalPlaneadas),
             $('<td>').text(item.totalReales),
             $('<td>').text(item.oE_Porcentaje),
-            $('<td>').text(item.gaP_Pzas),  
-            $('<td>').text(item.gaP_Mins),
+         //   $('<td>').text(item.gaP_Pzas),  
+           // $('<td>').text(item.gaP_Mins),
             $('<td>').text(item.tiempoMuerto),
            // $('<td>').text(item.programado),
             $('<td>').text(item.descripcion),    
@@ -223,8 +224,8 @@ $("#btnGuardar").click(function(){
   "totalPlaneadas":Number.parseInt($("#txtPlaneadas").val()),
   "totalReales": Number.parseInt($("#txtReales").val()),
   "oE_Porcentaje": Number.parseFloat($("#txtOE").val()),
-  "gaP_Pzas": Number.parseInt($("#txtGapPzas").val()),
-  "gaP_Mins": Number.parseInt($("#txtGapMins").val()),
+  //"gaP_Pzas": Number.parseInt($("#txtGapPzas").val()),
+  //"gaP_Mins": Number.parseInt($("#txtGapMins").val()),
   "tiempoMuerto": Number.parseInt($("#txtTM").val()),
   "programado": 0,
   "descripcionId":parseInt($('#descripcion option:selected').val()),
@@ -251,8 +252,8 @@ $.each(data, function(i, item) {
             $('<td>').text(''),
             $('<td>').text(item.totalReales),
             $('<td>').text(item.oE_Porcentaje),
-            $('<td>').text(item.gaP_Pzas),  
-            $('<td>').text(item.gaP_Mins),
+          //  $('<td>').text(item.gaP_Pzas),  
+          //  $('<td>').text(item.gaP_Mins),
             $('<td>').text(item.tiempoMuerto),
             //$('<td>').text(item.programado),
             $('<td>').text(item.descripcion),    
@@ -300,8 +301,8 @@ setTimeout(function(){ $('#Exito').hide(); }, 2000);
                         <th>Total Planeadas</th>
                         <th>Total Reales</th>
                         <th>OE(%)</th>                                
-                        <th>GAP(PIEZAS)</th>  
-                        <th>GAP(MINUTOS)</th>
+                       <!-- <th>GAP(PIEZAS)</th>  
+                        <th>GAP(MINUTOS)</th> -->
                         <th>TM</th>                                
                        <!--- <th>Prog</th>  -->
                         <th>Descripción</th>
