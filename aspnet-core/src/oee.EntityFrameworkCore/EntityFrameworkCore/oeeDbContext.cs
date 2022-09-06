@@ -4,6 +4,7 @@ using oee.Catalogos.Categorias;
 using oee.Catalogos.DescripcionFallas;
 using oee.Catalogos.Turnos;
 using oee.Operacion;
+using oee.Trazabilidad;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.Data;
@@ -55,6 +56,7 @@ public class oeeDbContext :
     public DbSet<Turno> Turnos { get; set; }
   public DbSet<Oee> Oee_Porcentaje { get; set; }
   public DbSet<TiempoCiclo> TiempoCiclos { get; set; }
+  public DbSet<Corte> Cortes { get; set; }
 
 
   // Tenant Management

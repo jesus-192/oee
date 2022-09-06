@@ -149,6 +149,40 @@ namespace oee.Migrations
                     b.ToTable("TiempoCiclos");
                 });
 
+            modelBuilder.Entity("oee.Trazabilidad.Corte", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Atado")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("Cantidad")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("FechaFinal")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("NumeroEmpleado")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("NumeroEmpleadoFinal")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("NumeroUnico")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("Rechazos")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Cortes");
+                });
+
             modelBuilder.Entity("Volo.Abp.AuditLogging.AuditLog", b =>
                 {
                     b.Property<Guid>("Id")
