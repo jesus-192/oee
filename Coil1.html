@@ -1,0 +1,337 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <head>
+        <title>Coil1</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+          <meta http-equiv="Content-Security-Policy"  content="default-src 'self' https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js 'unsafe-inline'; img-src https://* 'self' data:; upgrade-insecure-requests; connect-src https://*">
+          <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    </head>
+
+	<body>
+<!-- conexión con la base de datos -->
+
+	
+	<div class="wrapper">
+	
+	<div class="container">
+			
+		<div class="col-lg-12">
+		 
+			<center>
+                <h1>Bienvenido</h1>
+				
+				<h3>
+					
+				
+            </h3>
+				Captura los datos de la jornada en Coil1:
+               
+                <br>
+                <br>
+                <br>
+            <div class="kt-form kt-form--label-right">
+                            <div class="form-group row form-group-marginless kt-margin-t-20">
+                            <label class="col-lg-1 col-form-label">Fecha:</label>
+                                <div class="col-lg-2">
+                                    <div class="input-group date">
+                                        <input type="date" id="txtFecha" class="form-control" disabled autocomplete="off" />
+                                    </div>
+                                </div>
+                                <label class="col-lg-1 col-form-label">Selecciona el Turno:</label>
+                                <div class="col-lg-2">
+                                <select class="form-control" id="idturno">
+                                    <option value='0'>Seleccione..</option>
+                                <!-- <option value="0">Seleccione..</option>
+                                <option value="1">Turno 1</option>
+                                <option value="2">Turno 2</option>
+                                <option value="3">Turno 3</option>
+                                <option value="4">Turno 4</option> -->
+                                    </select>
+                                </div>
+                                <label class="col-lg-1 col-form-label">Hora Inicial:</label>
+                                <div class="col-lg-2">
+                                    <input type="time" class="form-control" id="txtHinicial">
+                                </div>
+                                <label class="col-lg-1 col-form-label">Hora Final:</label>
+                                <div class="col-lg-2">
+                                    <input type="time" class="form-control" id="txtHFinal">
+                                </div>
+                            </div>
+                            <div class="form-group row form-group-marginless kt-margin-t-20">
+                                <label class="col-md-1 col-form-label">Número de Parte:</label>
+                                <div class="col-lg-2">
+                                <input type="Number" class="form-control" id="txtParte" min="1">
+                                    <span class="form-text text-muted">Escriba el número de parte</span>
+                                </div>
+                                <label class="col-lg-1 col-form-label">Total Planeadas:</label>
+                                <div class="col-lg-2">
+                                <input type="number" disabled class="form-control" id="txtPlaneadas">
+                      
+                                    <!-- <span class="form-text text-muted">Escriba la cantidad de piezas planeadas</span> -->
+                                </div>
+                                <label class="col-lg-1 col-form-label">Total Reales:</label>
+                                <div class="col-lg-2">
+                                <input type="number" class="form-control" id="txtReales"min="1">
+                                 
+                                    <!-- <span class="form-text text-muted">Escriba la cantidad de piezas planeadas</span> -->
+                                </div>
+                                <label class="col-lg-1 col-form-label">OE(%):</label>
+                                <div class="col-lg-2">
+                                <input type="number" disabled class="form-control" id="txtOE">
+                                    </select>
+                                    <!-- <span class="form-text text-muted">Escriba la cantidad de piezas planeadas</span> -->
+                                </div>
+                                </div>
+                                <div class="form-group row form-group-marginless kt-margin-t-20">
+                             <!--  <label class="col-md-1 col-form-label">GAP(PZAS):</label>
+                                <div class="col-lg-2">
+                                <input type="Number" disabled class="form-control" id="txtGapPzas">
+                                </div>
+                                <label class="col-md-1 col-form-label">GAP(MINS):</label>
+                                <div class="col-lg-2">
+                                <input type="Number" disabled class="form-control" id="txtGapMins">
+                                </div>
+                            -->
+                                <label class="col-md-1 col-form-label">TM:</label>
+                                <div class="col-lg-2">
+                                <input type="Number" class="form-control" id="txtTM">
+                                </div>
+                                <!--<label class="col-md-1 col-form-label">PROG:</label>
+                                <div class="col-lg-2">
+                                <input type="Number" disabled class="form-control" id="txtProg">
+                                </div>-->
+                                <br>
+                                <br>
+                                <br>
+                                <label class="col-lg-1 col-form-label">Descripción:</label>
+                                <div class="col-lg-1">
+                                    <select class="form-control" id='descripcion' style='width: 200px;'>
+                                        <option value='0'>Seleccione..</option>
+                                    </select>
+                                </div>
+                                <script>
+                                    $(document).ready(function(){
+$('#Exito').hide();  
+$('#Error').hide();             
+var numeroParteList;
+  $.get("http://oee-api.azurewebsites.net/api/app/categoria", function(data){
+
+   });
+$.get("http://oee-api.azurewebsites.net/api/app/descripcion-falla/distinct-by-area?area=coil1", function(data){
+
+    var $dropdown = $("#descripcion");
+$.each(data, function() {
+    $dropdown.append($("<option />").val(this.id).text(this.modo));
+});
+});
+
+$.get("http://oee-api.azurewebsites.net/api/app/turno", function(data){
+  
+    var $dropdown = $("#idturno");
+$.each(data, function() {
+    $dropdown.append($("<option />").val(this.id).text(this.nombre));
+});
+
+$.get("http://oee-api.azurewebsites.net/api/app/oee/by-area?Area=coil1", function(data){
+response = JSON.stringify(data);
+$.each(data, function(i, item) {
+        var $tr = $('<tr>').append(
+            $('<td>').text(item.fechaFormato),
+            $('<td>').text(item.turno),
+            $('<td>').text(item.horaInicioFormato),
+            $('<td>').text(item.horaFinalFormato),
+            $('<td>').text(item.numeroParte),
+            $('<td>').text(item.totalPlaneadas),
+            $('<td>').text(item.totalReales),
+            $('<td>').text(item.oE_Porcentaje),
+         //   $('<td>').text(item.gaP_Pzas),  
+           // $('<td>').text(item.gaP_Mins),
+            $('<td>').text(item.tiempoMuerto),
+           // $('<td>').text(item.programado),
+            $('<td>').text(item.descripcion),    
+).appendTo('#tablaReporte');
+    });
+});
+
+$.get("http://oee-api.azurewebsites.net/api/app/tiempo-ciclo", function(data){
+    //var _this = this;
+    numeroParteList = data;
+    //console.log("txtParte", numeroParteList);
+});
+
+$("#txtParte").change(function(){
+    var numeroParte = parseInt(this.value);
+    var numeroParteInfo;
+    var totalPlaneado=0;
+    var oE_Porcentaje =0;
+    var tm =0;
+    var tiempoSegundos=0;
+    var horaInicio =$('#txtHinicial').val();
+    var horaInicialArray = horaInicio.split(":");
+    var totalMinutosInicial = Number(horaInicialArray[0]*60)+Number(horaInicialArray[1]);
+    var horaFinal = $('#txtHFinal').val();
+    var horaFinalArray = horaFinal.split(":");
+    var totalMinutosFinal = Number(horaFinalArray[0]*60)+Number(horaFinalArray[1]);
+    var tiempoTotalMinutos =totalMinutosFinal-totalMinutosInicial;
+    $.get("https://oee-api.azurewebsites.net/api/app/tiempo-ciclo/by-numero-parte?numeroParte="+numeroParte, function(data){
+    console.log("txtParte", data);
+    numeroParteInfo = data;
+    tiempoSegundos=data[0].tiempoEnSegundos;
+    totalPlaneado=(60/tiempoSegundos)*tiempoTotalMinutos;
+    $("#txtPlaneadas").val(totalPlaneado);
+
+});
+});
+
+
+$("#txtReales").change(function() {
+    var totalesReales = Number($("#txtReales").val());
+    var totalPlaneadas = Number($("#txtPlaneadas").val());
+    var oe=(totalesReales/totalPlaneadas)*100
+    $("#txtOE").val(oe.toFixed(2))
+    var gapPzas =totalPlaneadas-totalesReales;
+    $("#txtGapPzas").val(gapPzas);
+
+    var horaInicio =$('#txtHinicial').val();
+    var horaInicialArray = horaInicio.split(":");
+    var totalMinutosInicial = Number(horaInicialArray[0]*60)+Number(horaInicialArray[1]);
+    var horaFinal = $('#txtHFinal').val();
+    var horaFinalArray = horaFinal.split(":");
+    var totalMinutosFinal = Number(horaFinalArray[0]*60)+Number(horaFinalArray[1]);
+    var tiempoTotalMinutos =totalMinutosFinal-totalMinutosInicial;
+    $("#txtGapMins").val((tiempoTotalMinutos/60)*gapPzas);
+
+})
+
+$("#btnGuardar").click(function(){
+    var valida= true;
+    if($("#txtReales").val() === '' ){
+        valida = false;
+        $('#Error').show();   
+        return;
+    }
+   
+    
+    var data = {
+  "fecha": $('#txtFecha').val(),
+  "horaInicio": new Date($('#txtFecha').val() + ' '+ $('#txtHinicial').val()),
+  "horaFinal": new Date($('#txtFecha').val() + ' '+ $('#txtHFinal').val()),
+  "turnoId": parseInt($('#idturno option:selected').val()),
+  "numeroParte": $("#txtParte").val(),
+  "totalPlaneadas":Number.parseInt($("#txtPlaneadas").val()),
+  "totalReales": Number.parseInt($("#txtReales").val()),
+  "oE_Porcentaje": Number.parseFloat($("#txtOE").val()),
+  //"gaP_Pzas": Number.parseInt($("#txtGapPzas").val()),
+  //"gaP_Mins": Number.parseInt($("#txtGapMins").val()),
+  "tiempoMuerto": Number.parseInt($("#txtTM").val()),
+  "programado": 0,
+  "descripcionId":parseInt($('#descripcion option:selected').val()),
+  "area":"Coil1"
+   }
+    $.ajax({
+    url: "http://oee-api.azurewebsites.net/api/app/oee",
+    contentType: 'application/json',
+    crossDomain: true,
+    async: true,
+    type: "POST",
+    data: JSON.stringify(data),
+}).done(function(data) {
+    $("#tablaReporte tbody").empty();
+    $('#Exito').show();    
+    $.get("http://oee-api.azurewebsites.net/api/app/oee/by-area?Area=coil1", function(data){
+response = JSON.stringify(data);
+$.each(data, function(i, item) {
+        var $tr = $('<tr>').append(
+            $('<td>').text(item.fechaFormato),
+            $('<td>').text(item.turno),
+            $('<td>').text(item.horaInicioFormato),
+            $('<td>').text(item.horaFinalFormato),
+            $('<td>').text(item.numeroParte),
+            $('<td>').text(item.totalPlaneadas),
+            $('<td>').text(item.totalReales),
+            $('<td>').text(item.oE_Porcentaje),
+          //  $('<td>').text(item.gaP_Pzas),  
+          //  $('<td>').text(item.gaP_Mins),
+            $('<td>').text(item.tiempoMuerto),
+            //$('<td>').text(item.programado),
+            $('<td>').text(item.descripcion),    
+).appendTo('#tablaReporte');
+setTimeout(function(){ $('#Exito').hide(); }, 2000);
+    });
+});
+});
+})
+});
+                                       
+                                    });
+                            
+                                    </script>
+                              <!--   <select class="custom-select" id="idDesc">
+                                    <option value='0'>-Seleccione -</option>
+                                </select> -->
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                         <div class="form-button">
+                        <button type="submit" id="btnGuardar" class="btn btn-success">Guardar</button>
+                        <br>
+                        <br>
+                        <div class="alert alert-success" id="Exito" role="alert">
+                            Registro guardado con &eacute;xito
+                          </div>
+                          <div class="alert alert-danger" id="Error" role="alert">
+                            Por Favor capture todos los campos.
+                          </div>
+                        </div>
+                </div>
+			</center>
+ <hr>
+            <table class="table table-striped- table-bordered table-hover table-checkable dataTable no-footer dtr-inline" id="tablaReporte">   
+            
+                <thead class="text-center">
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Turno</th>                                
+                        <th>Hora Inicial</th>  
+                        <th>Hora Final</th>
+                        <th>Número de parte</th>
+                        <th>Total Planeadas</th>
+                        <th>Total Reales</th>
+                        <th>OE(%)</th>                                
+                       <!-- <th>GAP(PIEZAS)</th>  
+                        <th>GAP(MINUTOS)</th> -->
+                        <th>TM</th>                                
+                       <!--- <th>Prog</th>  -->
+                        <th>Descripción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                   
+         
+                             
+            </tbody>        
+            </table>                    
+            </div>
+            </div>  
+		</div>
+	</div>
+ 
+	</div>
+							
+	</body>
+    <script>var date = new Date();
+
+        var day = date.getDate();
+        var month = date.getMonth() + 1;
+        var year = date.getFullYear();
+        
+        if (month < 10) month = "0" + month;
+        if (day < 10) day = "0" + day;
+        
+        var today = year + "-" + month + "-" + day;       
+        document.getElementById("txtFecha").value = today;</script>
+</html>
