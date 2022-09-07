@@ -86,23 +86,24 @@
                                 </div>
                                 </div>
                                 <div class="form-group row form-group-marginless kt-margin-t-20">
-                             <!--  <label class="col-md-1 col-form-label">GAP(PZAS):</label>
-                                <div class="col-lg-2">
-                                <input type="Number" disabled class="form-control" id="txtGapPzas">
+
+                                <label class="col-md-1 col-form-label" style="display: none;">GAP(PZAS):</label>
+                                <div class="col-lg-2" style="display: none;">
+                                <input type="Number" disabled class="form-control"  id="txtGapPzas" style="display: none;">
                                 </div>
-                                <label class="col-md-1 col-form-label">GAP(MINS):</label>
-                                <div class="col-lg-2">
-                                <input type="Number" disabled class="form-control" id="txtGapMins">
+                                <label class="col-md-1 col-form-label" style="display: none;">GAP(MINS):</label>
+                                <div class="col-lg-2" style="display: none;">
+                                <input type="Number" disabled class="form-control" id="txtGapMins" style="display: none;">
                                 </div>
-                            -->
+                          <!--  -->
                                 <label class="col-md-1 col-form-label">TM:</label>
                                 <div class="col-lg-2">
                                     <input type="Number" min="0" class="form-control" id="txtTM">
                                 </div>
-                                <!--<label class="col-md-1 col-form-label">PROG:</label>
-                                <div class="col-lg-2">
+                                <label class="col-md-1 col-form-label"  style="display: none;">PROG:</label>
+                                <div class="col-lg-2"  style="display: none;">
                                 <input type="Number" disabled class="form-control" id="txtProg">
-                                </div>-->
+                                </div><!---->
                                 <br>
                                 <br>
                                 <br>
@@ -249,10 +250,10 @@ $("#btnGuardar").click(function(){
   "totalPlaneadas":Number.parseInt($("#txtPlaneadas").val()),
   "totalReales": Number.parseInt($("#txtReales").val()),
   "oE_Porcentaje": Number.parseFloat($("#txtOE").val()),
-  //"gaP_Pzas": Number.parseInt($("#txtGapPzas").val()),
-  //"gaP_Mins": Number.parseInt($("#txtGapMins").val()),
+  "gaP_Pzas": Number.parseInt($("#txtGapPzas").val()),
+  "gaP_Mins": Number.parseInt($("#txtGapMins").val()),
   "tiempoMuerto": Number.parseInt($("#txtTM").val()),
-  "programado": 0,
+  "programado": parseInt($("#txtTM").val()),
   "descripcionId":parseInt($('#descripcion option:selected').val()),
   "area":"Coil3",
   "ftq":Number.parseInt($("#txtFTQ").val()),
