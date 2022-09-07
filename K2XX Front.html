@@ -3,7 +3,7 @@
 <html>
 <head>
     <head>
-        <title>K2XX</title>
+        <title>K2XX Front</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
           <meta http-equiv="Content-Security-Policy"  content="default-src 'self' https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js 'unsafe-inline'; img-src https://* 'self' data:; upgrade-insecure-requests; connect-src https://*">
           <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
@@ -27,7 +27,7 @@
 					
 				
             </h3>
-				Captura los datos de la jornada en K2XX:
+				Captura los datos de la jornada en K2XX Front:
                
                 <br>
                 <br>
@@ -97,7 +97,7 @@
                             -->
                                 <label class="col-md-1 col-form-label">TM:</label>
                                 <div class="col-lg-2">
-                                <input type="Number" class="form-control" id="txtTM">
+                                    <input type="Number" min="0" class="form-control" id="txtTM">
                                 </div>
                                 <!--<label class="col-md-1 col-form-label">PROG:</label>
                                 <div class="col-lg-2">
@@ -112,6 +112,24 @@
                                         <option value='0'>Seleccione..</option>
                                     </select>
                                 </div>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                       <label class="col-md-1 col-form-label">FTQ:</label>
+                                       <div class="col-lg-2">
+                                       <input type="Number" class="form-control" id="txtFTQ" min="0">
+                                       </div>
+                                       <!--<label class="col-md-1 col-form-label">PROG:</label>
+                                       <div class="col-lg-2">
+                                       <input type="Number" disabled class="form-control" id="txtProg">
+                                       </div>-->
+                                       <br>
+                                       <br>
+                                       <br>
+                                       <label class="col-lg-1 col-form-label">Descripción:</label>
+                                       <div class="col-lg-1">
+                                           <select class="form-control" id='descripcionFTQ' style='width: 200px;'>
+                                               <option value='0'>Seleccione..</option>
+                                           </select>
+                                       </div>
                                 <script>
                                     $(document).ready(function(){
 $('#Exito').hide();  
@@ -120,12 +138,16 @@ var numeroParteList;
   $.get("http://oee-api.azurewebsites.net/api/app/categoria", function(data){
 
    });
-$.get("http://oee-api.azurewebsites.net/api/app/descripcion-falla/distinct-by-area?area=k2xx", function(data){
+$.get("http://oee-api.azurewebsites.net/api/app/descripcion-falla/distinct-by-area?area=K2XX Front", function(data){
 
     var $dropdown = $("#descripcion");
-$.each(data, function() {
-    $dropdown.append($("<option />").val(this.id).text(this.modo));
-});
+    $.each(data.filter(x => x.categoria !== "FTQ"), function() {
+        $dropdown.append($("<option />").val(this.id).text(this.modo));
+    });
+     var $dropdown = $("#descripcionFTQ");
+    $.each(data.filter(x => x.categoria === "FTQ"), function() {
+        $dropdown.append($("<option />").val(this.id).text(this.modo));
+    });
 });
 
 $.get("http://oee-api.azurewebsites.net/api/app/turno", function(data){
@@ -135,7 +157,7 @@ $.each(data, function() {
     $dropdown.append($("<option />").val(this.id).text(this.nombre));
 });
 
-$.get("http://oee-api.azurewebsites.net/api/app/oee/by-area?Area=k2xx", function(data){
+$.get("http://oee-api.azurewebsites.net/api/app/oee/by-area?Area=K2XX Front", function(data){
 response = JSON.stringify(data);
 $.each(data, function(i, item) {
         var $tr = $('<tr>').append(
@@ -151,7 +173,9 @@ $.each(data, function(i, item) {
            // $('<td>').text(item.gaP_Mins),
             $('<td>').text(item.tiempoMuerto),
            // $('<td>').text(item.programado),
-            $('<td>').text(item.descripcion),    
+            $('<td>').text(item.descripcion),  
+            $('<td>').text(item.ftq), 
+            $('<td>').text(item.descripcionFTQ),   
 ).appendTo('#tablaReporte');
     });
 });
@@ -229,7 +253,9 @@ $("#btnGuardar").click(function(){
   "tiempoMuerto": Number.parseInt($("#txtTM").val()),
   "programado": 0,
   "descripcionId":parseInt($('#descripcion option:selected').val()),
-  "area":"K2XX"
+  "area":"K2XX Front",
+  "ftq":Number.parseInt($("#txtFTQ").val()),
+  "descripcionftq": $('#descripcionFTQ option:selected').text()
    }
     $.ajax({
     url: "http://oee-api.azurewebsites.net/api/app/oee",
@@ -241,7 +267,7 @@ $("#btnGuardar").click(function(){
 }).done(function(data) {
     $("#tablaReporte tbody").empty();
     $('#Exito').show();    
-    $.get("http://oee-api.azurewebsites.net/api/app/oee/by-area?Area=K2XX", function(data){
+    $.get("http://oee-api.azurewebsites.net/api/app/oee/by-area?Area=K2XX Front", function(data){
 response = JSON.stringify(data);
 $.each(data, function(i, item) {
         var $tr = $('<tr>').append(
@@ -257,7 +283,9 @@ $.each(data, function(i, item) {
           //  $('<td>').text(item.gaP_Mins),
             $('<td>').text(item.tiempoMuerto),
             //$('<td>').text(item.programado),
-            $('<td>').text(item.descripcion),    
+            $('<td>').text(item.descripcion),  
+            $('<td>').text(item.ftq), 
+            $('<td>').text(item.descripcionFTQ)   
 ).appendTo('#tablaReporte');
 setTimeout(function(){ $('#Exito').hide(); }, 2000);
     });
@@ -306,6 +334,8 @@ setTimeout(function(){ $('#Exito').hide(); }, 2000);
                         <th>GAP(MINUTOS)</th> -->
                         <th>TM</th>                                
                        <!--- <th>Prog</th>  -->
+                        <th>Descripción</th>
+                        <th>FTQ</th>
                         <th>Descripción</th>
                     </tr>
                 </thead>

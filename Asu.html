@@ -97,7 +97,7 @@
                             -->
                                 <label class="col-md-1 col-form-label">TM:</label>
                                 <div class="col-lg-2">
-                                <input type="Number" class="form-control" id="txtTM">
+                                <input type="Number" min="0" class="form-control" id="txtTM">
                                 </div>
                                 <!--<label class="col-md-1 col-form-label">PROG:</label>
                                 <div class="col-lg-2">
@@ -106,12 +106,30 @@
                                 <br>
                                 <br>
                                 <br>
-                                <label class="col-lg-1 col-form-label">Descripción:</label>
+                                 <label class="col-lg-1 col-form-label">Descripción:</label>
                                 <div class="col-lg-1">
                                     <select class="form-control" id='descripcion' style='width: 200px;'>
                                         <option value='0'>Seleccione..</option>
                                     </select>
                                 </div>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                       <label class="col-md-1 col-form-label">FTQ:</label>
+                                       <div class="col-lg-2">
+                                       <input type="Number" class="form-control" id="txtFTQ" min="0">
+                                       </div>
+                                       <!--<label class="col-md-1 col-form-label">PROG:</label>
+                                       <div class="col-lg-2">
+                                       <input type="Number" disabled class="form-control" id="txtProg">
+                                       </div>-->
+                                       <br>
+                                       <br>
+                                       <br>
+                                       <label class="col-lg-1 col-form-label">Descripción:</label>
+                                       <div class="col-lg-1">
+                                           <select class="form-control" id='descripcionFTQ' style='width: 200px;'>
+                                               <option value='0'>Seleccione..</option>
+                                           </select>
+                                       </div>
                                 <script>
                                     $(document).ready(function(){
 $('#Exito').hide();  
@@ -123,9 +141,14 @@ var numeroParteList;
 $.get("http://oee-api.azurewebsites.net/api/app/descripcion-falla/distinct-by-area?area=Asu", function(data){
 
     var $dropdown = $("#descripcion");
-$.each(data, function() {
-    $dropdown.append($("<option />").val(this.id).text(this.modo));
-});
+    $.each(data.filter(x => x.categoria !== "FTQ"), function() {
+        $dropdown.append($("<option />").val(this.id).text(this.modo));
+    });
+
+     var $dropdown = $("#descripcionFTQ");
+    $.each(data.filter(x => x.categoria === "FTQ"), function() {
+        $dropdown.append($("<option />").val(this.id).text(this.modo));
+    });
 });
 
 $.get("http://oee-api.azurewebsites.net/api/app/turno", function(data){
@@ -151,7 +174,9 @@ $.each(data, function(i, item) {
            // $('<td>').text(item.gaP_Mins),
             $('<td>').text(item.tiempoMuerto),
            // $('<td>').text(item.programado),
-            $('<td>').text(item.descripcion),    
+            $('<td>').text(item.descripcion), 
+            $('<td>').text(item.ftq), 
+            $('<td>').text(item.descripcionFTQ),     
 ).appendTo('#tablaReporte');
     });
 });
@@ -229,7 +254,9 @@ $("#btnGuardar").click(function(){
   "tiempoMuerto": Number.parseInt($("#txtTM").val()),
   "programado": 0,
   "descripcionId":parseInt($('#descripcion option:selected').val()),
-  "area":"Asu"
+  "area":"Asu",
+  "ftq":Number.parseInt($("#txtFTQ").val()),
+  "descripcionftq": $('#descripcionFTQ option:selected').text()
    }
     $.ajax({
     url: "http://oee-api.azurewebsites.net/api/app/oee",
@@ -257,7 +284,9 @@ $.each(data, function(i, item) {
           //  $('<td>').text(item.gaP_Mins),
             $('<td>').text(item.tiempoMuerto),
             //$('<td>').text(item.programado),
-            $('<td>').text(item.descripcion),    
+            $('<td>').text(item.descripcion),   
+             $('<td>').text(item.ftq), 
+            $('<td>').text(item.descripcionFTQ),   
 ).appendTo('#tablaReporte');
 setTimeout(function(){ $('#Exito').hide(); }, 2000);
     });
@@ -306,6 +335,8 @@ setTimeout(function(){ $('#Exito').hide(); }, 2000);
                         <th>GAP(MINUTOS)</th> -->
                         <th>TM</th>                                
                        <!--- <th>Prog</th>  -->
+                        <th>Descripción</th>
+                        <th>FTQ</th>
                         <th>Descripción</th>
                     </tr>
                 </thead>

@@ -3,7 +3,7 @@
 <html>
 <head>
     <head>
-        <title>Coil1</title>
+        <title>K2XX Rear</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
           <meta http-equiv="Content-Security-Policy"  content="default-src 'self' https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js 'unsafe-inline'; img-src https://* 'self' data:; upgrade-insecure-requests; connect-src https://*">
           <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
@@ -27,7 +27,7 @@
 					
 				
             </h3>
-				Captura los datos de la jornada en Coil1:
+				Captura los datos de la jornada en K2XX Rear:
                
                 <br>
                 <br>
@@ -106,7 +106,7 @@
                                 <br>
                                 <br>
                                 <br>
-                               <label class="col-lg-1 col-form-label">Descripción:</label>
+                                <label class="col-lg-1 col-form-label">Descripción:</label>
                                 <div class="col-lg-1">
                                     <select class="form-control" id='descripcion' style='width: 200px;'>
                                         <option value='0'>Seleccione..</option>
@@ -138,13 +138,12 @@ var numeroParteList;
   $.get("http://oee-api.azurewebsites.net/api/app/categoria", function(data){
 
    });
-$.get("http://oee-api.azurewebsites.net/api/app/descripcion-falla/distinct-by-area?area=coil1", function(data){
+$.get("http://oee-api.azurewebsites.net/api/app/descripcion-falla/distinct-by-area?area=K2XX Rear", function(data){
 
     var $dropdown = $("#descripcion");
     $.each(data.filter(x => x.categoria !== "FTQ"), function() {
         $dropdown.append($("<option />").val(this.id).text(this.modo));
     });
-
      var $dropdown = $("#descripcionFTQ");
     $.each(data.filter(x => x.categoria === "FTQ"), function() {
         $dropdown.append($("<option />").val(this.id).text(this.modo));
@@ -158,7 +157,7 @@ $.each(data, function() {
     $dropdown.append($("<option />").val(this.id).text(this.nombre));
 });
 
-$.get("http://oee-api.azurewebsites.net/api/app/oee/by-area?Area=coil1", function(data){
+$.get("http://oee-api.azurewebsites.net/api/app/oee/by-area?Area=K2XX Rear", function(data){
 response = JSON.stringify(data);
 $.each(data, function(i, item) {
         var $tr = $('<tr>').append(
@@ -254,7 +253,7 @@ $("#btnGuardar").click(function(){
   "tiempoMuerto": Number.parseInt($("#txtTM").val()),
   "programado": 0,
   "descripcionId":parseInt($('#descripcion option:selected').val()),
-  "area":"Coil1",
+  "area":"K2XX Rear",
   "ftq":Number.parseInt($("#txtFTQ").val()),
   "descripcionftq": $('#descripcionFTQ option:selected').text()
    }
@@ -268,7 +267,7 @@ $("#btnGuardar").click(function(){
 }).done(function(data) {
     $("#tablaReporte tbody").empty();
     $('#Exito').show();    
-    $.get("http://oee-api.azurewebsites.net/api/app/oee/by-area?Area=coil1", function(data){
+    $.get("http://oee-api.azurewebsites.net/api/app/oee/by-area?Area=K2XX Rear", function(data){
 response = JSON.stringify(data);
 $.each(data, function(i, item) {
         var $tr = $('<tr>').append(
@@ -284,9 +283,9 @@ $.each(data, function(i, item) {
           //  $('<td>').text(item.gaP_Mins),
             $('<td>').text(item.tiempoMuerto),
             //$('<td>').text(item.programado),
-            $('<td>').text(item.descripcion),
+            $('<td>').text(item.descripcion),  
             $('<td>').text(item.ftq), 
-            $('<td>').text(item.descripcionFTQ),    
+            $('<td>').text(item.descripcionFTQ)   
 ).appendTo('#tablaReporte');
 setTimeout(function(){ $('#Exito').hide(); }, 2000);
     });
