@@ -257,7 +257,7 @@ $("#btnGuardar").click(function(){
   "descripcionId":parseInt($('#descripcion option:selected').val()),
   "area":"Coil3",
   "ftq":Number.parseInt($("#txtFTQ").val()),
-  "descripcionftq": $('#descripcionFTQ option:selected').text()
+  "descripcionftq":$('#descripcionFTQ option:selected').val() === '0' ? "" : $('#descripcionFTQ option:selected').text(),
    }
     $.ajax({
     url: "http://oee-api.azurewebsites.net/api/app/oee",
