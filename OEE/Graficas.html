@@ -1,0 +1,394 @@
+
+<!-- SHIFT --><div id="AVAILABILITY" style="width: 50%; height: 350px; margin: 0 auto;float:left;"></div>
+<!-- DAILY--><div id="AVA" style="width: 50%; height: 350px; margin: 0 auto;float:left;"></div>
+<!-- SHIFT --><div id="QUALITY" style="width: 50%; height: 350px; margin: 0 auto;float:left;"></div>
+<!-- DAILY --><div id="QUA" style="width: 50%; height: 350px; margin: 0 auto;float:left;"></div>
+<!-- SHIFT --><div id="PERFORMANCE" style="width: 50%; height: 350px; margin: 0 auto;float:left;"></div>
+<!-- DAILY --><div id="PERF" style="width: 50%; height: 350px; margin: 0 auto;float:left;"></div>
+		
+<div style="border-top:1px solid #CDCDCD;margin:10px;padding:0;clear:both;"></div>
+
+<div id="tiempoReal" style="height: 400px; margin: 0 auto;"></div>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+ <script src="https://code.highcharts.com/highcharts.js"></script>
+<script>
+
+$(document).ready(function(){
+// GRAFICA AVAILABILITY PER SHIFT
+$(function () {
+	$('#AVAILABILITY').highcharts({
+		chart: {
+			type: 'line',  // tipo de gráfica
+			borderWidth: 0 // ancho del borde de la gráfica
+		},
+		title: {
+			text: 'AVAILABILITY PER SHIFT', // título
+			x: -20 
+		},
+		subtitle: {
+			text: 'Año 2022', // subtítulo
+			x: -20
+		},
+		xAxis: {
+			categories: ['Turno 1', 'Turno 2', 'Turno 3', 'Turno 4'] // categorias
+		},
+		yAxis: {
+			title: {
+				text: '' // nombre del eje y
+			},
+			plotLines: [{
+				color: '#808080' 
+			}]
+		},
+		tooltip: {
+			valueSuffix: ' Millones' // el sufijo de la información presente en el "tooltip"
+		},
+		legend: { // configuración de la leyenda
+			layout: 'horizontal',
+			align: 'center',
+			verticalAlign: 'bottom',
+			borderWidth: 1
+		},
+		series: [{ // configuración de las series
+			name: 'Turno 1',
+			data: [50, 55, 49, 66]
+		}, {
+			name: 'Turno 2',
+			data: [35, 40, 41, 39]
+		}, {
+			name: 'Turno 3',
+			data: [23, 25, 32, 31]
+		},{
+			name: 'Turno 4',
+			data: [20, 48, 45, 39]
+		}]
+	});
+//GRAFICA QUALITY PER SHIFT
+	$('#QUALITY').highcharts({
+		chart: {
+			type: 'line',  // tipo de gráfica
+			borderWidth: 0 // ancho del borde de la gráfica
+		},
+		title: {
+			text: 'QUALITY PER SHIFT', // título
+			x: -20 
+		},
+		subtitle: {
+			text: 'Año 2022', // subtítulo
+			x: -20
+		},
+		xAxis: {
+			categories: ['Turno 1', 'Turno 2', 'Turno 3', 'Turno 4'] // categorías
+		},
+		yAxis: {
+			title: {
+				text: '' // nombre del eje de Y
+			},
+			plotLines: [{
+				color: '#808080' 
+			}]
+		},
+		tooltip: {
+			valueSuffix: ' Millones' // el sufijo de la información presente en el "tooltip"
+		},
+		legend: { // configuración de la leyenda
+			layout: 'horizontal',
+			align: 'center',
+			verticalAlign: 'bottom',
+			borderWidth: 1
+		},
+		series: [{ // configuración de las series
+			name: 'Turno 1',
+			data: [50, 55, 49, 66]
+		}, {
+			name: 'Turno 2',
+			data: [35, 40, 41, 39]
+		}, {
+			name: 'Turno 3',
+			data: [23, 25, 32, 31]
+		},{
+			name: 'Turno 4',
+			data: [20, 48, 45, 39]
+		}]
+	});
+//GRAFICA PERFORMANCE PER SHIFT
+    $('#PERFORMANCE').highcharts({
+			chart: {
+			type: 'line',  // tipo de gráfica
+			borderWidth: 0 // ancho del borde de la gráfica
+		},
+		title: {
+			text: 'PERFORMANCE PER SHIFT', // título
+			x: -20 
+		},
+		subtitle: {
+			text: 'Año 2022', // subtítulo
+			x: -20
+		},
+		xAxis: {
+			categories: ['Turno 1', 'Turno 2', 'Turno 3', 'Turno 4'] // categorías
+		},
+		yAxis: {
+			title: {
+				text: '' // nombre del eje de Y
+			},
+			plotLines: [{
+				color: '#808080' 
+			}]
+		},
+		tooltip: {
+			valueSuffix: ' Millones' // el sufijo de la información presente en el "tooltip"
+		},
+		legend: { // configuración de la leyenda
+			layout: 'horizontal',
+			align: 'center',
+			verticalAlign: 'bottom',
+			borderWidth: 1
+		},
+		series: [{ // configuración de las series
+			name: 'Turno 1',
+			data: [100, 54, 12, 53]
+		}, {
+			name: 'Turno 2',
+			data: [32, 40, 41, 40]
+		}, {
+			name: 'Turno 3',
+			data: [23, 52, 23, 13]
+		},{
+			name: 'Turno 4',
+			data: [20, 84, 54, 93]
+		}]
+	});
+//GRAFICA DAILY AVAILABILITY
+	$('#AVA').highcharts({
+		chart: {
+			type: 'line',  // tipo de gráfica
+			borderWidth: 0 // ancho del borde de la gráfica
+		},
+		title: {
+			text: 'DAILY AVAILABILITY', // título
+			x: -20 
+		},
+		subtitle: {
+			text: 'Año 2022', // subtítulo
+			x: -20
+		},
+		xAxis: {
+			categories: ['LUNES', 'MARTES', 'MIERCOLES', 'JUEVES', 'VIERNES'] // categorías
+		},
+		yAxis: {
+			title: {
+				text: '' // nombre del eje de Y
+			},
+			plotLines: [{
+				color: '#808080' 
+			}]
+		},
+		tooltip: {
+			valueSuffix: ' Millones' // el sufijo de la información presente en el "tooltip"
+		},
+		legend: { // configuración de la leyenda
+			layout: 'horizontal',
+			align: 'center',
+			verticalAlign: 'bottom',
+			borderWidth: 1
+		},
+		series: [{ // configuración de las series
+			name: 'LUNES',
+			data: [50, 55, 49, 66,36]
+		}, {
+			name: 'MARTES',
+			data: [35, 40, 41, 39,69]
+		}, {
+			name: 'MIERCOLES',
+			data: [23, 25, 32, 31,88]
+		},{
+			name: 'JUEVES',
+			data: [20, 48, 45, 39,87]
+		},{
+			name: 'VIERNES',
+			data: [23, 25, 32, 31,95]
+		}]
+	});	
+//GRAFICA DAILY QUALITY
+		$('#QUA').highcharts({
+			chart: {
+			type: 'line',  // tipo de gráfica
+			borderWidth: 0 // ancho del borde de la gráfica
+		},
+		title: {
+			text: 'DAILY QUALITY', // título
+			x: -20 
+		},
+		subtitle: {
+			text: 'Año 2022', // subtítulo
+			x: -20
+		},
+		xAxis: {
+            categories: ['LUNES', 'MARTES', 'MIERCOLES', 'JUEVES', 'VIERNES'] // categorías
+		},
+		yAxis: {
+			title: {
+				text: '' // nombre del eje de Y
+			},
+			plotLines: [{
+				color: '#808080' 
+			}]
+		},
+		tooltip: {
+			valueSuffix: ' Millones' // el sufijo de la información presente en el "tooltip"
+		},
+		legend: { // configuración de la leyenda
+			layout: 'horizontal',
+			align: 'center',
+			verticalAlign: 'bottom',
+			borderWidth: 1
+		},
+		series: [{ // configuración de las series
+			name: 'LUNES',
+			data: [100, 54, 12, 53,58]
+		}, {
+			name: 'MARTES',
+			data: [32, 40, 41, 40,25]
+		}, {
+			name: 'MIERCOLES',
+			data: [23, 52, 23, 13,25]
+		},{
+			name: 'JUEVES',
+			data: [20, 84, 54, 93,65]
+		},{
+			name: 'VIERNES',
+			data: [2, 48, 45, 39,56]
+		}]
+	});
+//GRAFICA DAILY PERFORMANCE  
+    $('#PERF').highcharts({
+			chart: {
+			type: 'line',  // tipo de gráfica
+			borderWidth: 0 // ancho del borde de la gráfica
+		},
+		title: {
+			text: 'DAILY PERFORMANCE ', // título
+			x: -20 
+		},
+		subtitle: {
+			text: 'Año 2022', // subtítulo
+			x: -20
+		},
+		xAxis: {
+            categories: ['LUNES', 'MARTES', 'MIERCOLES', 'JUEVES', 'VIERNES'] // categorías
+		},
+		yAxis: {
+			title: {
+				text: '' // nombre del eje de Y
+			},
+			plotLines: [{
+				color: '#808080' 
+			}]
+		},
+		tooltip: {
+			valueSuffix: ' Millones' // el sufijo de la información presente en el "tooltip"
+		},
+		legend: { // configuración de la leyenda
+			layout: 'horizontal',
+			align: 'center',
+			verticalAlign: 'bottom',
+			borderWidth: 1
+		},
+		series: [{ // configuración de las series
+			name: 'LUNES',
+			data: [100, 54, 12, 53,58]
+		}, {
+			name: 'MARTES',
+			data: [32, 40, 41, 40,25]
+		}, {
+			name: 'MIERCOLES',
+			data: [23, 52, 23, 13,25]
+		},{
+			name: 'JUEVES',
+			data: [20, 84, 54, 93,65]
+		},{
+			name: 'VIERNES',
+			data: [2, 48, 45, 39,56]
+		}]
+	});
+
+/* GRAFICA DE TIEMPO REAL */	
+		$(document).ready(function() {
+			Highcharts.setOptions({
+				global: {
+					useUTC: false
+				}
+			});
+		
+			var chart;
+			$('#tiempoReal').highcharts({
+				chart: {
+					type: 'spline',
+					animation: Highcharts.svg, 
+					marginRight: 10,
+					events: {
+						load: function() {
+		
+							// set up the updating of the chart each second
+							var OEE= this.series[0];
+							setInterval(function() {
+								var x = (new Date()).getTime(), // current time
+									y = Math.floor((Math.random() * 1000000) + 1);
+							OEE.addPoint([x, y], true, true);
+							}, 2000);
+						}
+					}
+				},
+				title: {
+					text: 'OEE'
+				},
+				xAxis: {
+					type: 'datetime',
+					tickPixelInterval: 150
+				},
+				yAxis: {
+					title: {
+						text: ''
+					},
+					plotLines: [{
+						value: 0,
+						width: 1,
+						color: '#808080'
+					}]
+				},
+				tooltip: {
+					formatter: function() {
+							return '<b>'+ this.series.name +'</b><br/>'+
+							Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) +'<br/>'+
+							Highcharts.numberFormat(this.y, 2);
+					}
+				},
+				legend: {
+					enabled: false
+				},
+				exporting: {
+					enabled: false
+				},
+				series: [{
+					name: 'OEE',
+					data: (function() {
+						// generate an array of random data
+						var data = [],
+							time = (new Date()).getTime(),
+							i;
+		
+						for (i = -10; i <= 0; i++) {
+							data.push({
+								x: time + i * 1000,
+								y: Math.floor((Math.random() * 1000000) + 1)
+							});
+						}
+						return data;
+					})()
+				}]
+			});
+		});
+    });
+});
+</script>
