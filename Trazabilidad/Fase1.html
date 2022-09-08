@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <head>
+        <title>Fase 1</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta http-equiv="Content-Security-Policy"
+            content="default-src 'self' https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js 'unsafe-inline'; img-src https://* 'self' data:; upgrade-insecure-requests; connect-src https://*">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    </head>
+<body>
+    <!-- conexión con la base de datos -->
+    <div class="wrapper">
+        <div class="container">
+            <div class="col-lg-12">
+                <center>
+                    <h1>Fase 1</h1>
+                    <h3>   
+                </h3>
+                MATERIAL CORTE
+                    <br>
+                    CREAR NUEVO REGISTRO:
+                    <br>
+                    <br>
+                    <div>
+                        <br>
+                    </div>
+        
+                    <div class="kt-form kt-form--label-right">
+                        <div class="form-group row form-group-marginless kt-margin-t-20">
+                            <div class="row">
+                                <label class="col-md-2 col-form-label">Nombre Usuario:</label>
+                                <label class="col-md-2 col-form-label" id="nombreUsuario"></label>
+                            </div>
+                            <label class="col-md-1 col-form-label">Número de Reloj:</label>
+                            <div class="col-lg-2">
+                            <input type="text" onkeypress="return ((event.which >= 48 && event.which <= 57) || event.which == 8)" maxlength="8" class="form-control" id="txtnumEmpleado">
+                            </div>
+                            <label class="col-md-1 col-form-label">Número de Atado:</label>
+                            <div class="col-lg-3">
+                            <input type="text" class="form-control" id="txtnumAtado">
+                            </div>
+                            <label class="col-lg-2 col-form-label">Confirmar Número de Atado:</label>
+                            <div class="col-lg-3">
+                            <input type="text" class="form-control" id="txtAtado2">
+                        </div>
+                    </div>
+                        <div class="form-group row form-group-marginless kt-margin-t-20">
+                            <label class="col-md-1 col-form-label">Número de Cortadora:</label>
+                            <div class="col-lg-2">
+                            <select class="form-control" id="idCortadora">
+                                <option value='0'>Seleccione..</option>
+                                <option value='PPR8001'>PPR8001</option>
+                                <option value='MB0228'>MB0228</option>
+                                </select>
+                            </div>
+                            <label class="col-md-1 col-form-label">Número de Parte:</label>
+                        <div class="col-lg-2">
+                            <input type="text" onkeypress="return ((event.which >= 48 && event.which <= 57) || event.which == 8)" class="form-control" id="txtParte">
+                        </div>
+                        <label class="col-md-1 col-form-label">Cantidad:</label>
+                        <div class="col-lg-2">
+                        <input type="text" onkeypress="return ((event.which >= 48 && event.which <= 57) || event.which == 8)" maxlength="8" class="form-control" id="txtCantidad">
+                        </div>
+                        <label class="col-md-1 col-form-label">Rechazos:</label>
+                        <div class="col-lg-2">
+                        <input type="text" onkeypress="return ((event.which >= 48 && event.which <= 57) || event.which == 8)" maxlength="8" class="form-control" id="txtRechazos">
+                        </div>                              
+                    </div>
+                    <br>
+                    <div class="form-button">
+                        <button type="subtmit" class="btn btn-warning" onclick="location.href='Usuario.html'"> Registrar Usuario</button>
+                        <button type="submit" id="btnGuardar" class="btn btn-success">Guardar</button>
+                        <button type="button" onclick="history.back()" id="btnCancelar" class="btn btn-danger">Cancelar</button>
+                        <br>
+                        <br>
+                        <div class="alert alert-success" id="Exito" role="alert">
+                            Registro guardado con &eacute;xito
+                        </div>
+                        <div class="alert alert-danger" id="Error" role="alert">
+                            Por Favor capture todos los campos.
+                        </div>
+                        <div class="alert alert-danger" id="Error2" role="alert">
+                           Los números de atado no coinciden.
+                        </div>
+                        <div class="alert alert-danger" id="Error3" role="alert">
+                           No Existe el Usuario ingresado, favor de darlo de alta
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </center>
+        <hr>
+    </div>
+</body>
+<script>
+    $(document).ready(function () {
+        $('#Exito').hide();
+        $('#Error').hide();
+        $('#Error2').hide(); 
+        $('#Error3').hide(); 
+ 
+
+        // $.get(" ", function (data) {
+
+        // });
+        $("#btnGuardar").click(function () {
+            var valida = true;
+            if ($("#txtnumEmpleado").val() === '') {
+                valida = false;
+                $('#Error').show();
+                $("#Error").fadeTo(2000, 500).slideUp(500, function(){
+                $("#Error").slideUp(500);
+});
+                return;
+            }
+            if ($("#txtParte").val() === '') {
+                valida = false;
+                $('#Error').show();
+                $("#Error").fadeTo(2000, 500).slideUp(500, function(){
+                $("#Error").slideUp(500);
+});
+                return;
+            }
+            if ($("#txtnumAtado").val() !== $("#txtAtado2").val()) {
+                valida = false;
+                $('#Error2').show();
+                $("#Error2").fadeTo(2000, 500).slideUp(500, function(){
+                $("#Error2").slideUp(500);
+});
+                return;
+            }
+            //
+            if ($("#idCortadora").val() === '') {
+                valida = false;
+                $('#Error').show();
+                $("#Error").fadeTo(2000, 500).slideUp(500, function(){
+                $("#Error").slideUp(500);
+});
+                return;
+            }
+            if ($("#txtCantidad").val() === '') {
+                valida = false;
+                $('#Error').show();
+                $("#Error").fadeTo(2000, 500).slideUp(500, function(){
+                $("#Error").slideUp(500);
+});
+                return;
+            }
+            if ($("#txtRechazos").val() === '') {
+                valida = false;
+                $('#Error').show();
+                $("#Error").fadeTo(2000, 500).slideUp(500, function(){
+                $("#Error").slideUp(500);
+});
+                return;
+            }
+        
+            var data = {
+                "numeroEmpleado": Number.parseInt($("#txtnumEmpleado").val()),
+                "atado":$("#txtnumAtado").val(),
+                "maquina":$("#idCortadora").val(),
+                "numeroParte": Number.parseInt($("#txtParte").val()),
+                "cantidad": parseInt($("#txtCantidad").val()),
+                "rechazos": parseInt($("#txtRechazos").val()),
+                "numeroUnico":new Date(),
+            }
+            $.ajax({
+                url: "https://oee-api.azurewebsites.net/api/app/corte",
+                
+                contentType: 'application/json',
+                crossDomain: true,
+                async: true,
+                type: "POST",
+                data: JSON.stringify(data),
+            }).done(function (dataResponse) {
+                $('#Exito').show();
+                localStorage.setItem("numEmpleado", Number.parseInt($("#txtnumEmpleado").val()));
+                localStorage.setItem("atado", $("#txtnumAtado").val()); 
+                // localStorage.setItem("Parte", Number.parseInt($("#txtParte").val()));
+                // localStorage.setItem("cantidad", Number.parseInt($("#txtnumAtado").val())); 
+                // localStorage.setItem("rechazos", Number.parseInt($("#txtnumAtado").val())); 
+                // localStorage.setItem("atado", Number.parseInt($("#txtnumAtado").val())); 
+                window.open('https://oee-form.azurewebsites.net/DetalleFase1.html', '_blank');
+                //window.location = "file:///C:/Users/Unico/Downloads/Trazabilidad/Trazabilidad/DetalleFase1.html";
+            });
+        });
+
+        $("#txtnumEmpleado").change(function(){
+            var  usuarioId = parseInt($("#txtnumEmpleado").val());
+            $.get("https://oee-api.azurewebsites.net/api/app/usuario/"+usuarioId+"/usuario", function(data){
+                if(data.id > 0){
+                    $('#Error3').hide(); 
+                    $("#nombreUsuario").text(data.nombres)
+                }else{
+                }
+            }).fail(function() {
+                $('#Error3').show(); 
+                $("#nombreUsuario").text("")
+                $("#Error3").fadeTo(2000, 500).slideUp(500, function(){
+                $("#Error3").slideUp(500);
+});
+            });
+        });
+    });
+</script>
+</html>
