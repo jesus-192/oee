@@ -207,7 +207,7 @@ $("#txtParte").change(function(){
     numeroParteInfo = data;
     tiempoSegundos=data[0].tiempoEnSegundos;
     totalPlaneado=(60/tiempoSegundos)*tiempoTotalMinutos;
-    $("#txtPlaneadas").val(totalPlaneado);
+    $("#txtPlaneadas").val(Math.trunc(totalPlaneado));
 
 });
 });
@@ -291,6 +291,18 @@ $.each(data, function(i, item) {
 ).appendTo('#tablaReporte');
 setTimeout(function(){ $('#Exito').hide(); }, 2000);
     });
+    // Se reinician los campos del formulario
+    $('#idturno').val("0");//Combo
+    $('#txtHinicial').val("0");//Fecha
+    $('#txtHFinal').val("0");
+    $('#txtParte').val("");
+    $('#txtPlaneadas').val("");
+    $('#txtReales').val("");
+    $('#txtOE').val("");
+    $('#txtTM').val("");
+    $('#descripcion').val("0");
+    $('#txtFTQ').val("");
+    $('#descripcionFTQ').val("0");
 });
 });
 })
@@ -321,7 +333,6 @@ setTimeout(function(){ $('#Exito').hide(); }, 2000);
 			</center>
  <hr>
             <table class="table table-striped- table-bordered table-hover table-checkable dataTable no-footer dtr-inline" id="tablaReporte">   
-            
                 <thead class="text-center">
                     <tr>
                         <th>Fecha</th>
@@ -341,10 +352,7 @@ setTimeout(function(){ $('#Exito').hide(); }, 2000);
                         <th>Descripción</th>
                     </tr>
                 </thead>
-                <tbody>
-                   
-         
-                             
+                <tbody>        
             </tbody>        
             </table>                    
             </div>

@@ -1,0 +1,168 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <head>
+        <title>Reporte Fase 1</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <meta http-equiv="Content-Security-Policy"  content="default-src 'self' https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js https://code.jquery.com/jquery-latest.min.js 'unsafe-inline'; img-src https://* 'self' data:; upgrade-insecure-requests; connect-src https://*">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <!-- <script type="text/javascript" src="./js/jquery-qrcode-master/jquery.qrcode.min.js"></script> -->
+        <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+        <script type="text/javascript" src="./js/jquery-barcode.js"></script>
+     </head>
+	<body>	
+    	<div class="wrapper">
+        	<div class="container">
+                <h3 style="margin-top:15px; text-align: center;">CORTADO DE TUBOS</h3>	
+
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr>
+                            <td colspan="2">NÚMERO ÚNICO</td>
+                            <td colspan="2"><label id="numeroUnico">{numeroUnico}</label></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">MÁQUINA</td>
+                            <td colspan="2"><label id="maquina"></label></td>
+                        </tr>
+                        <tr>
+                            <td>NÚMERO PARTE</td>
+                            <td><label id="numeroParte">{numeroParte}</label></td>
+                            <td colspan="2">FECHA DE INICIO</td>
+                        </tr>
+                        <tr>
+                            <td>CANTIDAD</td>
+                            <td><label id="cantidad"></label></td>
+                            <td>DÍA: <label id="dia"></label></td>
+                            <td>MES: <label id="mes"></label></td>
+                        </tr>
+                         <tr>
+                            <td>RECHAZOS</td>
+                            <td><label id="rechazo"></label></td>
+                            <td colspan="2">Hora: <label id="hora"></label>&nbsp;&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>OP. INICIAL</td>
+                            <td><label id="opInicial">{opInicial}</label></td>
+                            <td>OP. FINAL</td>
+                            <td> <label id="opFinal"></label></td>
+                        </tr>
+                    </tbody>
+                </table>	
+             <!--   <p style="text-align: center;">HOJA DE REGISTRO DE TRAZABILIDAD INICIAL</p>
+                <br>
+                <p style="text-align: center;">ESTA HOJA DEBERA LLENARSE EN SU TOTALIDAD CON LOS SIGUIENTES REQUISITOS:</p>
+                <br>
+                <p>1- La cantidad debe ser exacta, ya que esto afectará todos los siguientes procesos.</p>
+                <p>2- Las horas deben estar en formato 24 horas y <u>SOLO COLOCAR LA HORA</u>.</p>
+                <p>3- Cada operador debe llenar sus campos correspondientes y colocar su número de reloj no su nombre.</p>
+                <p>4- El número de parte (ya como flecha) debe de estar completo.</p>
+                <p>5- En caso de existir rechazos hay que capturar la cantidad exacta.</p>
+            -->
+                <br>
+                <!-- Insertar un numero generado de la siguiente manera con esas letras literal y esa info: -->
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-lg-6" style="font-weight: bold;">
+                        P<label id="numeroParte1">{numeroParte}</label>Q<span id="cantidad1">{cantidad}</span>S<label id="numeroUnico1">{numeroUnico}</label>L<label id="atado">{atado}</label>
+                    </div>
+                </div>
+                <br><br><br>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-lg-12" style="text-align:center">
+                        <div id="demo" style="margin-left :40%"></div>
+                    </div>
+                </div>
+                <br>
+                <br>
+                <br>
+                <p>IMPRIMIÓ: <label id="nombreOperador">{nombreOperador}</label></p>
+                <p style="text-align: center;"> ATADO: <label id="atado1">{atado}</label></p>
+        	</div>
+    	</div> 
+        <br>
+        <br>
+        <br>
+        <br>
+      <br>
+        <footer>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;F-200.C.24-1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;REV.00 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FECHA DE REV: 13/AGOSTO/2021</p>
+        </footer>
+
+	</body>
+     <script>
+        $(document).ready(function(){
+            var settings = {
+barWidth: 2,
+barHeight: 50,
+moduleSize: 8,
+showHRI: true,
+addQuietZone: true,
+marginHRI: 15,
+bgColor: "#FFFFFF",
+color: "#000000",
+fontSize: 10,
+output: "css",
+};   
+            function zeroPad(num) {
+                if(num === null)
+                    num = 0;
+
+                return num.toString().padStart(6, "0");
+            }
+
+            var numeroEmpleado = localStorage.getItem("numEmpleado");
+            var atado = localStorage.getItem("atado");
+            //$.get("https://localhost:44323/api/app/corte/"+numeroEmpleado+"/detalle?atado="+atado, function(data){
+            $.get("https://oee-api.azurewebsites.net/api/app/corte/"+numeroEmpleado+"/detalle?atado="+atado, function(data){
+                if(data.id > 0){
+                    $('#Error3').hide(); 
+                    console.log("detalle: ", data)
+                    
+                    $("#numeroUnico").text(data.numeroUnicoFormato);
+                    $("#numeroParte").text(data.numeroParte);
+                    $("#opInicial").text(data.numeroEmpleado);
+                    $("#atado").text(data.atado);
+                    $("#nombreOperador").text(data.nombreOperador);
+                    $("#maquina").text(data.maquina);
+                    $("#cantidad").text(zeroPad(data.cantidad));
+                    $("#rechazo").text(data.rechazos);
+                    $("#atado").text(data.atado);
+                    $("#maquina1").text(data.maquina);
+
+                    $("#numeroParte1").text(data.numeroParte);
+                    $("#cantidad1").text(zeroPad(data.cantidad));
+
+                    //$("#numeroUnico").text(data.numeroUnicoFormato);
+                    //$("#numeroParte").text(data.numeroUnicoFormato);
+                    //$("#opInicial").text(data.numeroEmpleado);
+                    //$("#atado").text(data.atado);
+                    $("#nombreOperador").text(data.nombreOperador);
+                    $("#numeroUnico1").text(data.numeroUnicoFormato);
+                    $("#atado1").text(data.atado);
+
+                    var date = new Date(data.numeroUnico); 
+                    $("#mes").text(date.getMonth()+1);
+                    $("#dia").text(date.getDate());
+                    $("#hora").text(date.getHours());
+                    var codigo = "P" + data.numeroParte + "Q" + zeroPad(data.cantidad) + "S"+data.numeroUnicoFormato + "L"+data.atado;
+
+                     console.log("ceros: ",zeroPad(data.cantidad)) 
+                     
+                    jQuery("#demo").barcode(
+                         codigo,"datamatrix", settings
+                    );
+
+                    window.print();  
+
+                    
+                }else{
+                }
+            }).fail(function(e) {
+                $('#Error3').show(); 
+                $("#nombreUsuario").text("")
+            });
+        });
+    </script>   
+</html>

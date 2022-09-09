@@ -207,7 +207,7 @@ $("#txtParte").change(function(){
     numeroParteInfo = data;
     tiempoSegundos=data[0].tiempoEnSegundos;
     totalPlaneado=(60/tiempoSegundos)*tiempoTotalMinutos;
-    $("#txtPlaneadas").val(totalPlaneado);
+    $("#txtPlaneadas").val(Math.trunc(totalPlaneado));
 
 });
 });

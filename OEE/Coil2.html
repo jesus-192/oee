@@ -204,7 +204,7 @@ $("#txtParte").change(function(){
     numeroParteInfo = data;
     tiempoSegundos=data[0].tiempoEnSegundos;
     totalPlaneado=(60/tiempoSegundos)*tiempoTotalMinutos;
-    $("#txtPlaneadas").val(totalPlaneado);
+    $("#txtPlaneadas").val(Math.trunc(totalPlaneado));
 
 });
 });
@@ -288,6 +288,18 @@ $.each(data, function(i, item) {
 ).appendTo('#tablaReporte');
 setTimeout(function(){ $('#Exito').hide(); }, 2000);
     });
+    // Se reinician los campos del formulario
+    $('#idturno').val("0");//Combo
+    $('#txtHinicial').val("0");//Fecha
+    $('#txtHFinal').val("0");
+    $('#txtParte').val("");
+    $('#txtPlaneadas').val("");
+    $('#txtReales').val("");
+    $('#txtOE').val("");
+    $('#txtTM').val("");
+    $('#descripcion').val("0");
+    $('#txtFTQ').val("");
+    $('#descripcionFTQ').val("0");
 });
 });
 })
