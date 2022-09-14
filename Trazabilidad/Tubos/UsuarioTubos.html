@@ -4,7 +4,7 @@
 <head>
 
     <head>
-        <title>Usuario</title>
+        <title>Usuario Tubos</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta http-equiv="Content-Security-Policy"
             content="default-src 'self' https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js 'unsafe-inline'; img-src https://* 'self' data:; upgrade-insecure-requests; connect-src https://*">
@@ -30,17 +30,16 @@
                             </div>
                             <label class="col-md-1 col-form-label">Nombre:</label>
                             <div class="col-lg-2">
-                            <input type="text" class="form-control" id="txtNombre">
+                            <input type="text" onkeypress="return ((event.which >= 97 && event.which <= 122)|| event.which == 32)" onkeyup="mayus(this);" class="form-control" id="txtNombre">
                             </div>
                             <label class="col-md-1 col-form-label">Apellido Paterno:</label>
                             <div class="col-lg-2">
-                                <input type="text"  class="form-control" id="txtApellido">
+                                <input type="text" onkeypress="return ((event.which >= 97 && event.which <= 122)|| event.which == 32)" onkeyup="mayus(this);"  class="form-control" id="txtApellido">
                             </div>
                             <label class="col-md-1 col-form-label">Apellido Materno:</label>
                             <div class="col-lg-2">
-                            <input type="text"  class="form-control" id="txtApellido2">
+                            <input type="text" onkeypress="return ((event.which >= 97 && event.which <= 122)|| event.which == 32)"onkeyup="mayus(this);"class="form-control" id="txtApellido2">
                             </div>
-                           
                         </div>
                     </div>
                     <br>
@@ -69,6 +68,11 @@
 </body>
 
 <script>
+    //Cambia a mayusculas lo que se teclea
+    function mayus(e) {
+    e.value = e.value.toUpperCase();
+}
+//Funcion de Guardado
     $(document).ready(function () {
         $('#Exito').hide();
         $('#Error').hide();
@@ -92,7 +96,7 @@
                 "apellidoMaterno":$("#txtApellido2").val(),
             }
             $.ajax({
-                url: "http://oee-bwi.azurewebsites.net/api/app/usuario", //api faltante
+                url: "https://oee-bwi.azurewebsites.net/api/app/usuario", //api faltante
                 contentType: 'application/json',
                 crossDomain: true,
                 async: true,
@@ -102,10 +106,14 @@
                 $('#Exito').show();
 
                 setTimeout(function() {
-                    window.location = "https://trazabilidad-app.azurewebsites.net/Fase1.html";
+                    window.location = "https://trazabilidad-app.azurewebsites.net/tubos/CorteTubos.html";
                 }, 1000);
             });
         });
     });
+    $('#txtnumEmpleado').val("");
+    $('#txtNombre').val("");
+    $('#txtApellido').val("");
+    $('#txtApellido2').val("");
 </script>
 </html>

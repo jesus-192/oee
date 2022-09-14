@@ -99,7 +99,7 @@
             var numeroEmpleado = localStorage.getItem("numEmpleado");
             var atado = localStorage.getItem("atado");
             //$.get("https://localhost:44323/api/app/corte/"+numeroEmpleado+"/detalle?atado="+atado, function(data){
-            $.get("https://oee-api.azurewebsites.net/api/app/corte/"+numeroEmpleado+"/detalle?atado="+atado, function(data){
+            $.get("https://oee-bwi.azurewebsites.net/api/app/corte/"+numeroEmpleado+"/detalle?atado="+atado, function(data){
                 if(data.id > 0){
                     $('#Error3').hide(); 
                     console.log("detalle: ", data)

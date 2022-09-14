@@ -136,10 +136,10 @@
 $('#Exito').hide();  
 $('#Error').hide();             
 var numeroParteList;
-  $.get("http://oee-api.azurewebsites.net/api/app/categoria", function(data){
+  $.get("https://oee-bwi.azurewebsites.net/api/app/categoria", function(data){
 
    });
-$.get("http://oee-api.azurewebsites.net/api/app/descripcion-falla/distinct-by-area?area=Coil3", function(data){
+$.get("https://oee-bwi.azurewebsites.net/api/app/descripcion-falla/distinct-by-area?area=Coil3", function(data){
 
      var $dropdown = $("#descripcion");
     $.each(data.filter(x => x.categoria !== "FTQ"), function() {
@@ -152,14 +152,14 @@ $.get("http://oee-api.azurewebsites.net/api/app/descripcion-falla/distinct-by-ar
     });
 });
 
-$.get("http://oee-api.azurewebsites.net/api/app/turno", function(data){
+$.get("https://oee-bwi.azurewebsites.net/api/app/turno", function(data){
   
     var $dropdown = $("#idturno");
 $.each(data, function() {
     $dropdown.append($("<option />").val(this.id).text(this.nombre));
 });
 
-$.get("http://oee-api.azurewebsites.net/api/app/oee/by-area?Area=Coil3", function(data){
+$.get("https://oee-bwi.azurewebsites.net/api/app/oee/by-area?Area=Coil3", function(data){
 response = JSON.stringify(data);
 $.each(data, function(i, item) {
         var $tr = $('<tr>').append(
@@ -182,7 +182,7 @@ $.each(data, function(i, item) {
     });
 });
 
-$.get("http://oee-api.azurewebsites.net/api/app/tiempo-ciclo", function(data){
+$.get("https://oee-bwi.azurewebsites.net/api/app/tiempo-ciclo", function(data){
     //var _this = this;
     numeroParteList = data;
     //console.log("txtParte", numeroParteList);
@@ -202,7 +202,7 @@ $("#txtParte").change(function(){
     var horaFinalArray = horaFinal.split(":");
     var totalMinutosFinal = Number(horaFinalArray[0]*60)+Number(horaFinalArray[1]);
     var tiempoTotalMinutos =totalMinutosFinal-totalMinutosInicial;
-    $.get("https://oee-api.azurewebsites.net/api/app/tiempo-ciclo/by-numero-parte?numeroParte="+numeroParte, function(data){
+    $.get("https://oee-bwi.azurewebsites.net/api/app/tiempo-ciclo/by-numero-parte?numeroParte="+numeroParte, function(data){
     console.log("txtParte", data);
     numeroParteInfo = data;
     tiempoSegundos=data[0].tiempoEnSegundos;
@@ -260,7 +260,7 @@ $("#btnGuardar").click(function(){
   "descripcionftq":$('#descripcionFTQ option:selected').val() === '0' ? "" : $('#descripcionFTQ option:selected').text(),
    }
     $.ajax({
-    url: "http://oee-api.azurewebsites.net/api/app/oee",
+    url: "https://oee-bwi.azurewebsites.net/api/app/oee",
     contentType: 'application/json',
     crossDomain: true,
     async: true,
@@ -269,7 +269,7 @@ $("#btnGuardar").click(function(){
 }).done(function(data) {
     $("#tablaReporte tbody").empty();
     $('#Exito').show();    
-    $.get("http://oee-api.azurewebsites.net/api/app/oee/by-area?Area=Coil3", function(data){
+    $.get("https://oee-bwi.azurewebsites.net/api/app/oee/by-area?Area=Coil3", function(data){
 response = JSON.stringify(data);
 $.each(data, function(i, item) {
         var $tr = $('<tr>').append(

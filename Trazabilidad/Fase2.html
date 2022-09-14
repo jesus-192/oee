@@ -129,7 +129,7 @@
                 "rechazos": parseInt($("#txtRechazos").val())
             }
             $.ajax({
-                url: "https://oee-api.azurewebsites.net/api/app/corte",
+                url: "https://oee-bwi.azurewebsites.net/api/app/corte",
                 
                 contentType: 'application/json',
                 crossDomain: true,
@@ -143,7 +143,7 @@
 
         $("#txtNumEmpleado").change(function(){
             $('#idunico').empty().append('<option selected="selected" value="0">Seleccione..</option>')
-            $.get("https://oee-api.azurewebsites.net/api/app/corte/numero-unico?NumeroEmpleado=" + parseInt($("#txtNumEmpleado").val()), function(data){
+            $.get("https://oee-bwi.azurewebsites.net/api/app/corte/numero-unico?NumeroEmpleado=" + parseInt($("#txtNumEmpleado").val()), function(data){
                 var $dropdown = $("#idunico");
                 $.each(data, function() {
                     $dropdown.append($("<option />").val(this.numeroUnicoFormato).text(this.numeroUnicoFormato));

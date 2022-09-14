@@ -106,7 +106,7 @@
                 "numeroUnico":new Date(),
             }
             $.ajax({
-                url: "https://oee-api.azurewebsites.net/api/app/corte",
+                url: "https://oee-bwi.azurewebsites.net/api/app/corte",
                 
                 contentType: 'application/json',
                 crossDomain: true,
@@ -119,14 +119,14 @@
                 $('#Exito').show();
                 localStorage.setItem("numEmpleado", Number.parseInt($("#txtnumEmpleado").val()));
                 localStorage.setItem("atado", $("#txtnumAtado").val());  
-                window.open('https://oee-form.azurewebsites.net/DetalleFase1.html', '_blank');
-                //window.location = "https://oee-form.azurewebsites.net/DetalleFase1.html";
+                window.open('https://trazabilidad-app.azurewebsites.net/DetalleFase1.html', '_blank');
+                //window.location = "https://trazabilidad-app.azurewebsites.net/DetalleFase1.html";
             });
         });
 
         $("#txtnumEmpleado").change(function(){
             var  usuarioId = parseInt($("#txtnumEmpleado").val());
-            $.get("https://oee-api.azurewebsites.net/api/app/usuario/"+usuarioId+"/usuario", function(data){
+            $.get("https://oee-bwi.azurewebsites.net/api/app/usuario/"+usuarioId+"/usuario", function(data){
                 if(data.id > 0){
                     $('#Error3').hide(); 
                     $("#nombreUsuario").text(data.nombres)

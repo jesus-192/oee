@@ -86,7 +86,7 @@
     $(document).ready(function () {
         $('#Exito').hide();
         $('#Error').hide();
-        $.get("http://oee-api.azurewebsites.net/api/app/tiempo-ciclo", function (data) {
+        $.get("https://oee-bwi.azurewebsites.net/api/app/tiempo-ciclo", function (data) {
 
             var $dropdown = $("#cmbPrograma");
             console.log("data",data)
@@ -109,7 +109,7 @@
 
         });
     });
-$.get("http://oee-api.azurewebsites.net/api/app/oee", function(data){
+$.get("https://oee-bwi.azurewebsites.net/api/app/oee", function(data){
 response = JSON.stringify(data);
 $.each(data, function(i, item) {
         var $tr = $('<tr>').append(

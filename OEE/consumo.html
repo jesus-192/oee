@@ -117,10 +117,10 @@
 $('#Exito').hide();  
 $('#Error').hide();             
 var numeroParteList;
-  $.get("http://oee-api.azurewebsites.net/api/app/categoria", function(data){
+  $.get("https://oee-bwi.azurewebsites.net/api/app/categoria", function(data){
 
    });
-$.get("http://oee-api.azurewebsites.net/api/app/descripcion-falla/distinct", function(data){
+$.get("https://oee-bwi.azurewebsites.net/api/app/descripcion-falla/distinct", function(data){
 
     var $dropdown = $("#descripcion");
 $.each(data, function() {
@@ -128,14 +128,14 @@ $.each(data, function() {
 });
 });
 
-$.get("http://oee-api.azurewebsites.net/api/app/turno", function(data){
+$.get("https://oee-bwi.azurewebsites.net/api/app/turno", function(data){
   
     var $dropdown = $("#idturno");
 $.each(data, function() {
     $dropdown.append($("<option />").val(this.id).text(this.nombre));
 });
 
-$.get("http://oee-api.azurewebsites.net/api/app/oee", function(data){
+$.get("https://oee-bwi.azurewebsites.net/api/app/oee", function(data){
 response = JSON.stringify(data);
 $.each(data, function(i, item) {
         var $tr = $('<tr>').append(
@@ -156,7 +156,7 @@ $.each(data, function(i, item) {
     });
 });
 
-$.get("http://oee-api.azurewebsites.net/api/app/tiempo-ciclo", function(data){
+$.get("https://oee-bwi.azurewebsites.net/api/app/tiempo-ciclo", function(data){
     //var _this = this;
     numeroParteList = data;
     //console.log("txtParte", numeroParteList);
@@ -176,7 +176,7 @@ $("#txtParte").change(function(){
     var horaFinalArray = horaFinal.split(":");
     var totalMinutosFinal = Number(horaFinalArray[0]*60)+Number(horaFinalArray[1]);
     var tiempoTotalMinutos =totalMinutosFinal-totalMinutosInicial;
-    $.get("https://oee-api.azurewebsites.net/api/app/tiempo-ciclo/by-numero-parte?numeroParte="+numeroParte, function(data){
+    $.get("https://oee-bwi.azurewebsites.net/api/app/tiempo-ciclo/by-numero-parte?numeroParte="+numeroParte, function(data){
     console.log("txtParte", data);
     numeroParteInfo = data;
     tiempoSegundos=data[0].tiempoEnSegundos;
@@ -231,7 +231,7 @@ $("#btnGuardar").click(function(){
   "descripcionId":parseInt($('#descripcion option:selected').val()),
    }
     $.ajax({
-    url: "http://oee-api.azurewebsites.net/api/app/oee",
+    url: "https://oee-bwi.azurewebsites.net/api/app/oee",
     contentType: 'application/json',
     crossDomain: true,
     async: true,
@@ -240,7 +240,7 @@ $("#btnGuardar").click(function(){
 }).done(function(data) {
     $("#tablaReporte tbody").empty();
     $('#Exito').show();    
-    $.get("http://oee-api.azurewebsites.net/api/app/oee", function(data){
+    $.get("https://oee-bwi.azurewebsites.net/api/app/oee", function(data){
 response = JSON.stringify(data);
 $.each(data, function(i, item) {
         var $tr = $('<tr>').append(
